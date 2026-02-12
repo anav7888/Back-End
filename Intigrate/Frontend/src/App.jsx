@@ -7,7 +7,7 @@ const App = () => {
   const [notes, setNotes] = useState([])
 
   function fetchNotes() {
-    axios.get('http://localhost:3000/api/notes')
+    axios.get('https://back-end-y1z9.onrender.com/api/notes')
       .then((res) => {
         setNotes(res.data.notes)
       })
@@ -21,7 +21,7 @@ const App = () => {
     const { title, description } = e.target.elements
     console.log(title.value, description.value)
 
-    axios.post('http://localhost:3000/api/notes', {
+    axios.post('https://back-end-y1z9.onrender.com/api/notes', {
       title: title.value,
       description: description.value
     })
@@ -34,7 +34,7 @@ const App = () => {
   }
 
 function handleDeleteNote(noteid){
-  axios.delete("http://localhost:3000/api/notes/"+noteid)
+  axios.delete("https://back-end-y1z9.onrender.com/api/notes/"+noteid)
   .then((res)=>{
     console.log(res.data)
     fetchNotes()
@@ -43,7 +43,7 @@ function handleDeleteNote(noteid){
 
 function handleUpdateNote(noteid){
   const newDescription = prompt("Enter New Description")
-  axios.patch("http://localhost:3000/api/notes/"+noteid,{
+  axios.patch("https://back-end-y1z9.onrender.com/api/notes/"+noteid,{
     description:newDescription
   })
   .then((res)=>{
