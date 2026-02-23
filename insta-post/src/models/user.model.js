@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "https://ik.imagekit.io/Anav/avatar.webp" 
     }
+
 })
 
 const userModel = mongoose.model("users",userSchema)
