@@ -1,28 +1,34 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router'
-import axios from 'axios'
+import { Link, useNavigate } from 'react-router'
+import { useAuth } from '../hooks/useAuth'
+
 
 const Register = () => {
+
+    const {handleRegister,loading} = useAuth()
 
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    async function handleFormSubmit(e){
+    const navigate = useNavigate()
+
+    const handleFormSubmit = async (e)=>{
         e.preventDefault()
 
-    //    await axios.post("http://localhost:3000/api/auth/register",{
-    //         username,
-    //         email,
-    //         password
-    //     },{
-    //         withCredentials:true
-    //     })
-    //     .then(res => {
-    //         console.log(res.data)
-    //     })
-    
+        await  handleRegister(username,email,password)
+    navigate('/login')
+
     }
+
+    if(loading){
+        return (
+          <main>
+            <h1>Loading.....</h1>
+          </main>
+        )
+      }
+    
 
 
     return (
@@ -45,7 +51,7 @@ const Register = () => {
                         type="password"
                         name='Password'
                         placeholder='Enter password' />
-                    <button type='submit'>Registration</button>
+                    <button className='button primary-button' type='submit'>Registration</button>
                 </form>
 
                 <p>Already have an account? <Link className='toggleAuthForm' to='/login'>Login</Link> </p>
