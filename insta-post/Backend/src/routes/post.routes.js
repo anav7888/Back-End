@@ -25,5 +25,13 @@ postRouter.get('/details/:postId', identifyUser, postController.getPostDetailsCO
 
 postRouter.post('/like/:postId', identifyUser, postController.likePostController)
 
+/**
+ * @routes Post /api/posts/feed
+ * @description get all the post created in the db
+ * @access Private
+ */
+
+postRouter.get('/feed', identifyUser, postController.getFeedController)
+
 
 module.exports = postRouter

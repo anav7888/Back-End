@@ -33,7 +33,7 @@ async function createPostController(req, res) {
 
 async function getPostController(req, res) {
 
-    
+
 
     const userId = req.user.id
 
@@ -51,61 +51,72 @@ async function getPostController(req, res) {
 
 async function getPostDetailsCOntroller(req, res) {
 
-  
+
 
     const userId = req.user.id
-    const postId = req.params.postId   
- 
-    
+    const postId = req.params.postId
+
+
     const post = await postModel.findById(postId)
     console.log("Post ID:", postId)
-    if(!post){
+    if (!post) {
         return res.status(404).json({
             message: "Post not found."
         })
     }
-    
+
 
     const isUserValid = post.user.toString() === userId
-    if(!isUserValid){
+    if (!isUserValid) {
         return res.status(403).json({
-            message:"Forbidden content."
+            message: "Forbidden content."
         })
     }
 
     return res.status(200).json({
-        message:"Post fetched Successfully",
+        message: "Post fetched Successfully",
         post
     })
 
 }
 
-async function likePostController(req,res){
+async function likePostController(req, res) {
 
     const username = req.user.username
     const postId = req.params.postId
 
     const post = await postModel.findById(postId)
-    if(!post){
+    if (!post) {
         res.status(404).json({
-            message:'post not found'
+            message: 'post not found'
         })
     }
 
     const like = await likeModel.create({
-        post : postId,
-        user : username
+        post: postId,
+        user: username
     })
 
-   return res.status(200).json({
-    message:"Post like successfully",
-    like
-   })
+    return res.status(200).json({
+        message: "Post like successfully",
+        like
+    })
 }
+
+async function getFeedController(req, res) {
+    const posts = await postModel.find().populate("user")
+
+    res.status(200).json({
+        message:"post fetched successfully",
+        posts
+    })
+}
+
 
 module.exports = {
     createPostController,
     getPostController,
     getPostDetailsCOntroller,
-    likePostController
+    likePostController,
+    getFeedController
 }
