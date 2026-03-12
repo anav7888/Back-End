@@ -11,9 +11,7 @@ async function authUser(req, res, next) {
             message: "Token not provided"
         })
     }
-    const isTokenBlacklisted = await blacklistModel.findOne({
-        token
-    })
+    const isTokenBlacklisted = await redis.get(token)
 
     if (isTokenBlacklisted) {
         return res.status(401).json({
