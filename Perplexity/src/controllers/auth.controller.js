@@ -50,3 +50,33 @@ export async function register(req, res) {
 }
 
 
+export async function verifyEmail(req, res) {
+    const { token } = req.query;
+
+    const decoded = jwt.verify( token, process.env.JWT_SECRET);
+
+    const user = await userModel.findOne({ email: decoded.email });
+
+    if (!user) {
+        return res.status(400).json({
+            message: "Invalid token",
+            success: false,
+            err: "User not found"
+        })
+    }
+
+    user.verified = true;
+
+    await user.save();
+
+    const html = `
+    <h1>Email Verified Successfully</h1>
+    <p>Your email has been verified, You can log in to your accound,</p>
+    <a href="http://localhost:300/login">Go to Login</a>
+    `
+
+    res.send(html)
+
+}
+
+
