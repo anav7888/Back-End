@@ -6,7 +6,7 @@ const model = new ChatGoogleGenerativeAI({
 });
 
 export async function testAI(){
-    model.invoke("what is ai explain under 100 words give a response in hinglish").then((response)=>{
+    model.invoke("what is nothing explain in hinglish").then((response)=>{
         console.log(response.text)
     })
 }
