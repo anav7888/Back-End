@@ -1,3 +1,4 @@
+//AI 
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 
 const model = new ChatGoogleGenerativeAI({
@@ -6,7 +7,7 @@ const model = new ChatGoogleGenerativeAI({
 });
 
 export async function testAI(){
-    model.invoke("what is nothing explain in hinglish").then((response)=>{
+    model.invoke("what is llm explain in hinglish").then((response)=>{
         console.log(response.text)
     })
 }
