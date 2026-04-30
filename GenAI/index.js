@@ -1,6 +1,12 @@
-import readline from "readline"
+import readline from "readline";
 
 const rl = readline.createInterface({
     input: process.stdin,
-    input: process.stdout,
+    output: process.stdout,
 })
+
+// rl.question("what is your name?", (name)=>{
+//     console.log(`Hello ${name}!`);
+//     rl.close();
+// })
+
