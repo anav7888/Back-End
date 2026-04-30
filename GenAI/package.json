@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@langchain/mistralai": "^1.0.8",
+    "dotenv": "^17.4.2",
     "langchain": "^1.3.5",
     "readline-sync": "^1.4.10"
   }
