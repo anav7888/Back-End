@@ -16,7 +16,7 @@ const message = []
 
 while (true) {
 
-    const userInput = await rl.question("\x1b[32mYou:\x1b[0m ")
+    const userInput = await rl.question("\x1b[32mYou:\x1b[0m")
 
     message.push(new HumanMessage(userInput))
 
