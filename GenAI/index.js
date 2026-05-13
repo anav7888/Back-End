@@ -11,9 +11,9 @@ const emailTool = tool(
         name: "emailTool",
         description: "Use this tool to send an email",
         schema: z.object({
-            to: z.string().description("the recipient email address"),
-            html: z.string().description("The html content of the email"),
-            subject: z.string().description("The subject of the email"),
+            to: z.string().describe("the recipient email address"),
+            html: z.string().describe("The html content of the email"),
+            subject: z.string().describe("The subject of the email"),
         })
     }
 )
@@ -32,21 +32,23 @@ const agent = createAgent({
     tools: [emailTool]
 })
 
-const message = []
+const messages = []
 
 while (true) {
 
     const userInput = await rl.question("\x1b[32mYou:\x1b[0m")
 
-    message.push(new HumanMessage(userInput))
+    messages.push(new HumanMessage(userInput))
 
-    const response = await agent.invoke(message)
+    const response = await agent.invoke({
+        messages,
+    });
 
-    message.push(response)
+
+    messages.push(response.messages[response.messages.length - 1])
 
     console.log(response);
 
-    // console.log(`\x1b[34m[AI]\x1b[0m ${response.content}`)
 }
 
 
