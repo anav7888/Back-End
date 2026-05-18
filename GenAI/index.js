@@ -44,12 +44,9 @@ while (true) {
         messages,
     });
 
-
-    
-
     messages.push(response.messages[response.messages.length - 1])
 
-    console.log(`\x1b[34m[AI]\x1b[0m ${response.messages[ response.messages.length - 1 ].content}`)
+    console.log(`\x1b[34m[AI]\x1b[0m ${response.messages[response.messages.length - 1].content}`)
 
 }
 
